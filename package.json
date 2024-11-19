@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "youtube clone backend",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "keywords": [
     "backend",
@@ -12,5 +14,11 @@
     "node"
   ],
   "author": "codewithmanas",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
 }
