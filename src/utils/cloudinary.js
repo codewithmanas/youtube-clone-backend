@@ -8,11 +8,12 @@ dotenv.config({ path: "./.env" });
 cloudinary.config({ 
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
     api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET // Click 'View API Keys' above to copy your API secret
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });   
 
 
 const uploadOnCloudinary = async (filePath) => {
+
     try {
         if(!filePath) return null;  
 
@@ -20,7 +21,9 @@ const uploadOnCloudinary = async (filePath) => {
         const result = await cloudinary.uploader.upload(filePath, {
             resource_type: 'auto',
         });
-        // console.log("File uploaded successfully:", result.url);
+
+        console.log("File uploaded successfully:", result.url);
+        
         fs.unlinkSync(filePath);
         return result;
 
