@@ -55,14 +55,10 @@ const registerUser = asyncHandler(async (req, res) => {
         coverImageLocalPath = req.files?.coverImage[0]?.path;
     }    
 
-    console.log("avatarLocalPath, coverImageLocalPath", avatarLocalPath, coverImageLocalPath);
-
 
     const avatar = await uploadOnCloudinary(avatarLocalPath);
     const coverImage = await uploadOnCloudinary(coverImageLocalPath);
 
-    console.log("avatar: ", avatar);
-    console.log("coverImage: ", coverImage);
 
     if(!avatar){ // if upload fails
         throw new ApiError(500, "Failed to upload avatar image");
@@ -87,24 +83,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
     return res.status(201).json(new ApiResponse(200, "User created successfully", responseUser));
-
-
-    res.status(200).json({ success: true, message: "done"});
-
-    console.log("before return statement");
-    return;
-    console.log("after return statement");
-
-    
-
-    // validation - not empty
-    // check if user already exists: username, email
-    // check for images, check for avatar
-    // upload them to cloudinary, avatar
-    // create user object - create entry in db
-    // remove password and refresh token from response
-    // check for user creation
-    // return response
 
 })
 

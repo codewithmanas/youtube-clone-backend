@@ -4,10 +4,7 @@ import cors from "cors";
 const app = express();
 
 // Utils Import
-// import { responseFormatter } from "./utils/responseFormatter.js";
-// import { errorFormatter } from "./utils/errorFormatter.js";
 import { ApiResponse } from "./utils/ApiResponse.js";
-// import { ApiError } from "./utils/ApiError.js";
 
 // Routes Import
 import userRouter from "./routes/user.route.js";
@@ -35,11 +32,9 @@ app.get("/health-check", (req, res) => {
 });
 
 
-
 // Routes declaration
 app.use("/api/v1/users", userRouter);
 app.use("/health", healthCheckRouter);
-
 
 
 // 404 Error Handling
@@ -51,11 +46,6 @@ app.use((req, res, next) => {
 // Global Error Handling Middleware
 app.use((err, req, res, next) => {
     console.error("Error Stack: ", err.stack);
-  
-    // res.status(err.status || 500).json({
-    //   message: err.message || 'Internal Server Error',
-    //   error: process.env.NODE_ENV === 'development' ? err : {},
-    // });
 
     const statusCode = err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -67,7 +57,6 @@ app.use((err, req, res, next) => {
     res.status(statusCode).json(response);
 
   });
-
 
 
 export default app;
